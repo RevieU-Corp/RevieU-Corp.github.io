@@ -16,6 +16,7 @@
 1.  **Code as Documentation**: 代码即文档，保持清晰优于炫技。
 2.  **Consistency**: 统一的“平庸”代码 > 混乱的“天才”代码。
 3.  **Automation**: 能自动化的流程（Lint, Test, Deploy）绝不依赖人工。
+4.  **Docs as Code**: 文档像代码一样需要 Review、需要版本控制。
 
 ---
 
@@ -25,10 +26,9 @@ RevieU 采用多仓库协作模式，请根据职能 Clone 相应的仓库：
 
 | Repository Name | Scope | Tech Stack | Description |
 | :--- | :--- | :--- | :--- |
-| **`revieu-handbook`** | **Docs** | Markdown | 本仓库。包含开发规范、架构文档、Onboarding 指南。 |
-| **[`revieu-web`](../revieu-web)** | **Frontend** | React, TypeScript, Tailwind | 前端单页应用 (SPA) 代码。 |
-| **[`revieu-backend`](../revieu-backend)** | **Backend** | Go, Python, Java | 微服务后端代码 (Monorepo)，包含所有 Service。 |
-| **[`revieu-infra`](../revieu-infra)** | **DevOps** | K8s, Helm, Terraform | 基础设施配置、CI/CD 脚本、环境部署文件。 |
+| **[`revieu-handbook`](https://github.com/RevieU-Corp/revieu-handbook)** | **Docs** | Markdown | 本仓库。包含开发规范、架构文档、Onboarding 指南。 |
+| **[`revieu-web`](https://github.com/RevieU-Corp/revieu-web)** | **Frontend** | React, TypeScript, Tailwind | 前端单页应用 (SPA) 代码。 |
+| **[`revieu-backend`](https://github.com/RevieU-Corp/revieu-backend)** | **Backend** | Go, Python, Java | 微服务后端代码 (Monorepo)，包含所有 Service。 |
 
 ---
 
@@ -41,7 +41,6 @@ RevieU 采用多仓库协作模式，请根据职能 Clone 相应的仓库：
 | **`@RevieU-Corp/Arch-Team`** | **Architecture & Docs** | All Repos (Admin) | 架构设计评审、文档纠错、重大技术决策、CI/CD 故障。 |
 | **`@RevieU-Corp/Frontend-Devs`** | **Web / UI** | `revieu-web` (Write) | 前端组件复用询问、UI 还原度验收、BFF 层接口联调。 |
 | **`@RevieU-Corp/Backend-Devs`** | **Microservices** | `revieu-backend` (Write) | 接口报错 (500/502)、数据库字段新增、API 契约变更。 |
-| **`@RevieU-Corp/Infra-Team`** | **DevOps** | `revieu-infra` (Write) | 开发环境容器挂了、申请新的测试环境资源、部署卡住。 |
 
 > **Note**: 请根据你的职能加入对应的 Team。如果你无法 Push 代码，请检查你是否在正确的 Team 中。
 
@@ -71,7 +70,18 @@ RevieU 采用多仓库协作模式，请根据职能 Clone 相应的仓库：
 *如何构建、部署与监控。*
 * [**Environment Setup**](./docs/04-devops/local-setup.md): 本地开发环境搭建 (Docker Compose)。
 * [**CI/CD Pipeline**](./docs/04-devops/cicd-pipeline.md): 流水线配置说明。
-* [**Kubernetes Deployment**](./docs/04-devops/k8s-deployment.md): 服务配置、ConfigMap 与 Secrets 管理。
+* [**Integrations & Webhooks**](./docs/04-devops/integrations.md): 消息通知、Webhook 配置说明。
+
+### 05. Security & Compliance (安全与合规)
+*定义系统的安全防线与数据合规要求。*
+* [**Secret Management**](./docs/05-security/secrets.md): 密钥管理、环境变量配置。
+* [**Data Privacy**](./docs/05-security/privacy.md): 个人隐私数据 (PII) 处理、日志脱敏。
+* [**Security Scanning**](./docs/05-security/scanning.md): 依赖扫描与静态分析。
+
+### 06. Project & Collaboration (项目协作)
+*团队日常运作与决策记录。*
+* [**Release Management**](./docs/06-collaboration/release.md): 版本命名习惯与发版流程。
+* [**Architecture Decisions**](./docs/06-collaboration/adr.md): 重大决策记录 (ADR) 提交指南。
 
 ---
 
@@ -82,19 +92,21 @@ RevieU 采用多仓库协作模式，请根据职能 Clone 相应的仓库：
 1.  [ ] 阅读本页面的 **About** 与 **Philosophy**。
 2.  [ ] 配置本地开发环境，详见 [**Environment Setup**](./docs/04-devops/local-setup.md)。
 3.  [ ] 阅读你所在技术栈的 **Coding Standards**。
-4.  [ ] 从 Jira/任务板领取你的第一个 `Good First Issue`。
+4.  [ ] 从 **Project** 领取你的第一个 `Good First Issue`。
 5.  [ ] 提交代码前，确保阅读了 [**Git Workflow**](./docs/01-workflow/git-flow.md)。
 
 ---
 
 ## 🤝 Contribution (如何贡献文档)
 
-本文档是活的 (Living Document)。如果你发现流程有误或规范过时：
+本文档是活的 (Living Document)。如果你发现流程有误或规范过时，请遵循以下步骤进行更新：
 
-1.  Fork 本仓库。
-2.  修改 Markdown 文件。
-3.  提交 Pull Request 并 Assign 给架构组 (`@Arch-Team`)。
-4.  **禁止**在未讨论的情况下直接修改核心 API 规范。
+1.  **Create Branch**: 在本地拉取最新代码，并创建一个新的文档分支。
+    * 修改子目录请使用 `docs/01-workflow/short-description` (例如 `docs/01-workflow/update-git-flow`)
+    * 修改 README 请使用 `docs/short-description` (例如 `docs/update-git-flow`)
+2.  **Edit**: 修改 Markdown 文件，确保格式整洁。
+3.  **Push & PR**: 将分支推送到本仓库 (Origin)，发起 Pull Request 并 Assign 给 `@RevieU-Corp/Arch-Team`。
+4.  **Discussion**: 对于核心规范（如 API 结构、分支模型）的变更，请务必先在 PR 中讨论，**禁止**在未达成共识前合并。
 
 ---
 
