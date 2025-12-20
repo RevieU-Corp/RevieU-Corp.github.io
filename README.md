@@ -1,0 +1,101 @@
+# RevieU Engineering Handbook
+### RevieU 研发手册
+
+> **Single Source of Truth** for RevieU Engineering Team.
+> RevieU 研发团队的唯一真理来源。
+
+![Status](https://img.shields.io/badge/Status-Under_Construction-yellow) ![Maintainer](https://img.shields.io/badge/Maintainer-@Arch--Team-blue) ![Access](https://img.shields.io/badge/Access-Internal_Only-red) ![Version](https://img.shields.io/badge/Version-EA-lightgrey) 
+
+---
+
+## 📖 About (简介)
+
+欢迎来到 **RevieU**。本手册旨在定义团队的工程标准、协作流程与技术架构。无论你是前端、后端还是运维工程师，都必须遵循本文档中定义的规范，以确保项目的高内聚、低耦合与可维护性。
+
+**Our Philosophy (核心理念):**
+1.  **Code as Documentation**: 代码即文档，保持清晰优于炫技。
+2.  **Consistency**: 统一的“平庸”代码 > 混乱的“天才”代码。
+3.  **Automation**: 能自动化的流程（Lint, Test, Deploy）绝不依赖人工。
+
+---
+
+## 🏗️ Repository Matrix (项目仓库矩阵)
+
+RevieU 采用多仓库协作模式，请根据职能 Clone 相应的仓库：
+
+| Repository Name | Scope | Tech Stack | Description |
+| :--- | :--- | :--- | :--- |
+| **`revieu-handbook`** | **Docs** | Markdown | 本仓库。包含开发规范、架构文档、Onboarding 指南。 |
+| **[`revieu-web`](../revieu-web)** | **Frontend** | React, TypeScript, Tailwind | 前端单页应用 (SPA) 代码。 |
+| **[`revieu-backend`](../revieu-backend)** | **Backend** | Go, Python, Java | 微服务后端代码 (Monorepo)，包含所有 Service。 |
+| **[`revieu-infra`](../revieu-infra)** | **DevOps** | K8s, Helm, Terraform | 基础设施配置、CI/CD 脚本、环境部署文件。 |
+
+---
+
+## 👥 Team Structure & Contact (团队与联系人)
+
+为了提高沟通效率，我们在 GitHub Organization 中预设了以下 User Groups。在 Issue 或 PR 中请直接使用 Group Alias 进行提问或指派，避免点对点私聊。
+
+| Team Alias (团队代号) | Scope (负责范围) | Access Level (权限) | When to Mention (何时艾特) |
+| :--- | :--- | :--- | :--- |
+| **`@RevieU-Corp/Arch-Team`** | **Architecture & Docs** | All Repos (Admin) | 架构设计评审、文档纠错、重大技术决策、CI/CD 故障。 |
+| **`@RevieU-Corp/Frontend-Devs`** | **Web / UI** | `revieu-web` (Write) | 前端组件复用询问、UI 还原度验收、BFF 层接口联调。 |
+| **`@RevieU-Corp/Backend-Devs`** | **Microservices** | `revieu-backend` (Write) | 接口报错 (500/502)、数据库字段新增、API 契约变更。 |
+| **`@RevieU-Corp/Infra-Team`** | **DevOps** | `revieu-infra` (Write) | 开发环境容器挂了、申请新的测试环境资源、部署卡住。 |
+
+> **Note**: 请根据你的职能加入对应的 Team。如果你无法 Push 代码，请检查你是否在正确的 Team 中。
+
+---
+
+## 📚 Documentation Index (文档索引)
+
+### 01. Workflow & Collaboration (协作流程)
+*定义我们如何协同工作，如何管理代码生命周期。*
+* [**Git Workflow**](./docs/01-workflow/git-flow.md): 分支策略 (Branching Model)、Commit Message 规范。
+* [**Code Review Guide**](./docs/01-workflow/code-review.md): 提交 PR 前的自查清单 (Checklist)。
+* [**Definition of Done (DoD)**](./docs/01-workflow/dod.md): 任务完结的标准定义。
+
+### 02. Coding Standards (开发规约)
+*各技术栈的硬性代码规范。*
+* [**Global API Standards**](./docs/02-standards/api-specs.md): **(核心)** 统一响应体结构 (Response Envelope)、错误码字典、RESTful 命名设计。
+* [**Frontend Guidelines**](./docs/02-standards/frontend-react.md): React 组件目录、Hooks 使用规范、CSS 命名。
+* [**Backend Guidelines (Polyglot)**](./docs/02-standards/backend-polyglot.md): Go/Python/Node 多语言共存规范、日志格式 (Log Format)、错误处理。
+
+### 03. Architecture & Design (架构设计)
+*系统的宏观设计与决策记录。*
+* [**System Architecture**](./docs/03-architecture/system-overview.md): 系统拓扑图、微服务拆分逻辑。
+* [**Database Schema**](./docs/03-architecture/database-design.md): 数据库设计原则、Migration 流程。
+* [**Authentication Flow**](./docs/03-architecture/auth-flow.md): JWT 鉴权流程、网关 (Gateway) 转发逻辑。
+
+### 04. DevOps & Deployment (运维与部署)
+*如何构建、部署与监控。*
+* [**Environment Setup**](./docs/04-devops/local-setup.md): 本地开发环境搭建 (Docker Compose)。
+* [**CI/CD Pipeline**](./docs/04-devops/cicd-pipeline.md): 流水线配置说明。
+* [**Kubernetes Deployment**](./docs/04-devops/k8s-deployment.md): 服务配置、ConfigMap 与 Secrets 管理。
+
+---
+
+## 🚀 Onboarding Checklist (必读)
+
+请按顺序完成以下步骤：
+
+1.  [ ] 阅读本页面的 **About** 与 **Philosophy**。
+2.  [ ] 配置本地开发环境，详见 [**Environment Setup**](./docs/04-devops/local-setup.md)。
+3.  [ ] 阅读你所在技术栈的 **Coding Standards**。
+4.  [ ] 从 Jira/任务板领取你的第一个 `Good First Issue`。
+5.  [ ] 提交代码前，确保阅读了 [**Git Workflow**](./docs/01-workflow/git-flow.md)。
+
+---
+
+## 🤝 Contribution (如何贡献文档)
+
+本文档是活的 (Living Document)。如果你发现流程有误或规范过时：
+
+1.  Fork 本仓库。
+2.  修改 Markdown 文件。
+3.  提交 Pull Request 并 Assign 给架构组 (`@Arch-Team`)。
+4.  **禁止**在未讨论的情况下直接修改核心 API 规范。
+
+---
+
+*© 2025 RevieU Team. Internal Use Only.*
