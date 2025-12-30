@@ -68,3 +68,38 @@
 1.  不要在 GitHub 评论区进行长篇大论的辩论（超过 3 个回合）。
 2.  直接线下沟通。
 3.  如果无法达成一致，请 Tech Lead 或架构师进行仲裁。
+
+---
+
+## 6. Reviewer Assignment (审核人指派)
+
+GitHub 提供了多种方式来实现从“手动指定”到“全自动分配”的流程：
+
+### 6.1 Manual Assignment (手动指定)
+最直接的方式，在 PR 创建页面或侧边栏侧边栏（Sidebar）：
+* **Reviewers**: 搜索并指定个人（如 `@username`）或团队（如 `@org/team`）。
+* **Assignees**: 通常指 PR 的负责人（通常是你自己），负责推进 PR 流程。
+
+### 6.2 CODEOWNERS (推荐)
+在仓库根目录或 `.github/` 目录下创建 `CODEOWNERS` 文件。一旦 PR 修改了特定文件，GitHub 会**自动**邀请对应的负责人作为 Reviewer。
+
+```text
+# 所有 .js 文件归前端组管
+*.js    @my-org/frontend-team
+
+# /docs/ 目录下的变更找文档团队
+/docs/  @my-org/docs-team
+```
+
+### 6.3 Team Code Review Assignment (团队内轮岗)
+如果指定了一个大型团队，可以开启“自动分配”策略，避免干扰所有人：
+* **Round robin (轮询)**: 按顺序轮流分配。
+* **Load balance (负载均衡)**: 优先分配给最近 Review 任务较少的人。
+* **设置路径**: Team Settings -> Code review assignment。
+
+### 6.4 Branch Protection Rules (强制审核)
+结合“分支保护规则”强制执行审核流程：
+1.  开启 **Require a pull request before merging**。
+2.  勾选 **Require review from Code Owners**。
+
+这样可以确保关键代码（如 `src/`）必须经过特定人员（Code Owners）的 Approve 才能合并。

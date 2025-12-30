@@ -80,9 +80,11 @@ RevieU 强制遵循 **[Conventional Commits](https://www.conventionalcommits.org
 
 ## 4. Workflow Lifecycle (开发全流程)
 
-### Step 1: Start a Task
-1.  在 GitHub Projects 上领取任务，将状态拖至 **In Progress**。
-2.  在本地拉取最新代码并创建分支：
+### Step 1: Start a Task (Issue First!)
+1.  **Issue First**: 所有开发工作必须先有 Issue。如果没有，请自己在 GitHub 上开一个 Issue。
+2.  **Assign**: 将该 Issue 指派给自己，确保团队其他成员知道谁在负责这项任务。
+3.  **In Progress**: 在 GitHub Projects 上领取任务，将状态拖至 **In Progress**。
+4.  **Local Branch**: 在本地拉取最新代码并创建分支（分支名务必带上 Issue ID）：
     ```bash
     git checkout develop
     git pull origin develop
@@ -191,4 +193,30 @@ git config --global core.autocrlf true   # Windows
 git config --global user.name "Your Name"
 git config --global user.email "your.email@revieu.com"
 ```
+
+---
+
+## 8. Collaborative Principles (协作准则与风险管理)
+
+随着团队规模扩大，为了减少冲突和重复劳动，必须遵循以下协作原则：
+
+### 8.1 Atomic Updates (原子化更新)
+*   **原则**: 每次 Submission 或 Commit 必须是最小原子单位。
+*   **文件移动 vs 代码修改**: 
+    *   如果你需要移动文件路径 (Refactor Location)，请**仅执行移动操作**并立即 Push。不要在同一个 Commit 中修改该文件的代码。
+    *   如果你需要修改代码，请在移动操作完成后，再另起 Commit 进行修改。
+*   **禁止混合**: 禁止在一次 PR 中同时包含大规模的文件结构调整和复杂的逻辑修改。
+
+### 8.2 Conflict Management (冲突处理)
+*   **谁产生，谁解决**: 发生冲突时，**最后一位提交代码的人**（即触发了冲突的那位）负责处理冲突并确保合并后的稳定性。
+*   **及时 Rebase**: 开发过程中应频繁 `git pull origin develop` 并 Rebase 到自己的分支上，尽早发现潜在冲突。
+
+### 8.3 Major Refactoring (大规模破坏性变更通知)
+*   进行大规模 Refactor、重构核心组件或破坏性更新前，**必须**在 Discord 或 微信群里提前同步。
+*   严禁在未告知团队的情况下对公共模块执行大规模结构调整，这会导致其他正在并行开发的同事面临严重的合并地狱。
+
+### 8.4 Task Visibility (任务透明度)
+*   **Issue 是协作的起点**: 严禁在没有 Issue/Task 的情况下直接提交代码。创作 Issue 后必须指派（Assign）负责人。
+*   **AI 协作提示**: 提交任务描述给 AI 时，请确保它知道你的 Issue ID，以便生成规范的分支名和 Commit Message。
+
 
