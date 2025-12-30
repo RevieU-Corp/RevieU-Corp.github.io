@@ -22,7 +22,7 @@
 ### 2.1 CI/CD Pipeline Triggers
 * **Provider**: GitHub Actions (Native Integration)
 * **Trigger Events**:
-    * `push` (branches: `main`, `develop`) -> 触发构建与部署。
+    * `push` (branches: `main`, `dev`) -> 触发构建与部署。
     * `pull_request` (opened, synchronize) -> 触发 Lint 和 Unit Test。
 * **Configuration**: 详见各仓库 `.github/workflows/*.yml` 文件。
 
