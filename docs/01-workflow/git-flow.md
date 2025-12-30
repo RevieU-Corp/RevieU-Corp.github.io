@@ -86,8 +86,8 @@ RevieU 强制遵循 **[Conventional Commits](https://www.conventionalcommits.org
 3.  **In Progress**: 在 GitHub Projects 上领取任务，将状态拖至 **In Progress**。
 4.  **Local Branch**: 在本地拉取最新代码并创建分支（分支名务必带上 Issue ID）：
     ```bash
-    git checkout develop
-    git pull origin develop
+    git checkout dev
+    git pull origin dev
     git checkout -b feat/101-add-avatar-upload
     ```
 
@@ -105,7 +105,7 @@ RevieU 强制遵循 **[Conventional Commits](https://www.conventionalcommits.org
     git push origin feat/101-add-avatar-upload
     ```
 2.  在 GitHub 仓库页面创建 **Pull Request (PR)**：
-    * **Base**: `develop`
+    * **Base**: `dev`
     * **Compare**: `feat/101-add-avatar-upload`
     * **Title**: `feat: Implement avatar upload (#101)` (关联 Issue)
 3.  **Assign**: 指派给自己。
@@ -135,14 +135,14 @@ git checkout -b hotfix/payment-error
 
 2. 修复 Bug 并提交。
 3. 开启 PR 合并回 `main`。
-4. **关键步骤**: 修复同时必须同步回 `develop`，防止下次发布时 Bug 复活。
-* *操作*: 将代码 Cherry-pick 到 `develop` 或另外提一个 PR 合并到 `develop`。
+4. **关键步骤**: 修复同时必须同步回 `dev`，防止下次发布时 Bug 复活。
+* *操作*: 将代码 Cherry-pick 到 `dev` 或另外提一个 PR 合并到 `dev`。
 
 ---
 
 ## 6. Troubleshooting (紧急救援指南)
 
-**场景**: 你不小心在受保护的 `main` 或 `develop` 分支上直接修改了代码（甚至已经 commit 了），但无法推送到远端，因为分支保护规则会拦截。
+**场景**: 你不小心在受保护的 `main` 或 `dev` 分支上直接修改了代码（甚至已经 commit 了），但无法推送到远端，因为分支保护规则会拦截。
 
 **请根据你当前的状态选择救援方案：**
 
@@ -155,7 +155,7 @@ git checkout -b hotfix/payment-error
     ```
 2.  **切换/新建分支** (切到正确的分支)：
     ```bash
-    git checkout develop
+    git checkout dev
     git checkout -b feat/your-feature-name
     ```
 3.  **释放修改** (把刚才打包的代码应用到新分支上)：
@@ -209,7 +209,7 @@ git config --global user.email "your.email@revieu.com"
 
 ### 8.2 Conflict Management (冲突处理)
 *   **谁产生，谁解决**: 发生冲突时，**最后一位提交代码的人**（即触发了冲突的那位）负责处理冲突并确保合并后的稳定性。
-*   **及时 Rebase**: 开发过程中应频繁 `git pull origin develop` 并 Rebase 到自己的分支上，尽早发现潜在冲突。
+*   **及时 Rebase**: 开发过程中应频繁 `git pull origin dev` 并 Rebase 到自己的分支上，尽早发现潜在冲突。
 
 ### 8.3 Major Refactoring (大规模破坏性变更通知)
 *   进行大规模 Refactor、重构核心组件或破坏性更新前，**必须**在 Discord 或 微信群里提前同步。
